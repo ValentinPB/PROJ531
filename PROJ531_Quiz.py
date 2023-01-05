@@ -65,7 +65,7 @@ if len(questions) != len(timers) :      #Verification de la cohérence entre le 
 if bon :        #Si aucun problème n'a été detecté.
     print('Aucun problème détecté.')
 
-#=======
+
 #with open('C:\Users\Valentin\Documents\GitHub\PROJ531\Quizs\QuizTest.txt') as q :
 #    content = q.readlines()
 #close(q)
@@ -126,21 +126,7 @@ class quiz:
 
             
 
-def partiess(Questions,reponse,repc,point):
-    score=0
-    for k in range(0,len(Questions)):
-        print(Questions[k])
-        print(reponse[k])
-        r=input('rep')
-        print(r)
-        if r==repc[k]:
-            score=score+point[k]
-            print (True)
-        else:
-            print(False)
-            print('True answer is')
-            print(repc[k])
-    return score 
+
     
 
     
@@ -158,5 +144,4 @@ testpoint=[[1], [2]]
 testquiz=quiz(testquestions,testrep,testrepcorr,testpoint)
 
 
-partiess(testquestions,testrep,testrepcorr,testpoint)
-kk
+
