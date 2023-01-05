@@ -7,38 +7,48 @@ class quiz:
         
     def affichequestion(self,numeros):
         print (self.questions[numeros] )
+        return  (self.questions[numeros] )
     
     def afficherep(self,numeros):
         print (self.rep[numeros])
+        return (self.rep[numeros])
     
     def afficherepcorrect(self,numeros):
-        print (self.repcorr[numeros])
+        for k in range(0,len(self.repcorr[numeros])):
+            if self.repcorr[numeros][k]==1:
+                print(k+1)
+                return k+1
     
-    def donner_une_rep(self):
+    def donner_une_rep(self,numeros):
         reponse_user=input('reponse')
-        #print (reponse_user)
-        return reponse_user
+        
+       
+       
+        return int(reponse_user)
 
 
     def comparaison_rep(self,rep_user,numeros):
-        if rep_user==self.repcorr[numeros]:
+        if self.repcorr[numeros][rep_user-1]==1:
             print(True)
             return True
 
         else:
             print(False, "True answer is")
-            self.afficherepcorrect(numeros)    
+            self.afficherepcorrect(numeros)  
+            return False  
 
 
     
-    def partie(self,score=0):
-        for k in range(0,len(self.nom_questions)):
+    def partie(self):
+        score=0
+        for k in range(0,len(self.questions)):
             self.affichequestion(k)
             self.afficherep(k)
-            r=self.donner_une_rep
-            self.comparaison_rep(r,k)
-            if self.comparaison_rep(r,k)==True:
-                score=score+self.point
+            
+            
+            
+            if self.comparaison_rep(self.donner_une_rep(k),k)==True:
+                score=score+int(self.point[k])
         print(score)
     
     def __str__(self):
@@ -52,7 +62,8 @@ class quiz:
 testquestions = ['q1', 'Q2']
 testrep = [['r11', 'r21'], ['r21', 'r22', 'r23', 'r24']]
 testrepcorr = [[0,1], [0,0,1,0]]
-testpoint=[[1], [2]]
+testpoint=[1, 2]
 
 testquiz=quiz(testquestions,testrep,testrepcorr,testpoint)
-testquiz.comparaison_rep([0,1],0)
+
+testquiz.partie()
