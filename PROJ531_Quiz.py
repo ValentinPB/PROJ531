@@ -1,6 +1,5 @@
 ##PROJ531 Quiz
 
-<<<<<<< HEAD
 #Lecture du fichier
 with open(r'C:\Users\Valentin\Documents\GitHub\PROJ531\Quizs\QuizTest.txt') as q :
     content = q.readlines()     #Enregistrement de ce qui a été lu
@@ -65,16 +64,14 @@ if len(questions) != len(timers) :      #Verification de la cohérence entre le 
 
 if bon :        #Si aucun problème n'a été detecté.
     print('Aucun problème détecté.')
-=======
+
+#=======
 #with open('C:\Users\Valentin\Documents\GitHub\PROJ531\Quizs\QuizTest.txt') as q :
 #    content = q.readlines()
 #close(q)
 
 #print(content)
 
-
-
->>>>>>> 64a04aa10c89f30af2ccf19d28185a49e3d682cc
 
 class quiz:
     def __init__(self,questions,rep,repcorr,point):
