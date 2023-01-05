@@ -1,0 +1,1 @@
+TitreTest2;Question1,Question2;Reponse11.Reponse12,Reponse21.Reponse22;0.1,1.0;1,1;0,0
