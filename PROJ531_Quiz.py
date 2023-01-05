@@ -64,3 +64,4 @@ if len(questions) != len(timers) :      #Verification de la cohérence entre le 
 
 if bon :        #Si aucun problème n'a été detecté.
     print('Aucun problème détecté.')
+
