@@ -12,4 +12,4 @@ rep = [[r11, r21], [r21, r22, r23, r24]]
 repcorr = [[O,1], [0,0,1,0]]
 
 #test 12
-
+#si ca marche bac c vrmt cool 
