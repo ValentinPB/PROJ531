@@ -88,10 +88,11 @@ def partiess(Questions,reponse,repc,point):
 
 testquestions = ['q1', 'Q2']
 testrep = [['r11', 'r21'], ['r21', 'r22', 'r23', 'r24']]
-testrepcorr = [['0','1'], [0,0,1,0]]
+testrepcorr = [[0,1], [0,0,1,0]]
 testpoint=[[1], [2]]
 
 testquiz=quiz(testquestions,testrep,testrepcorr,testpoint)
 
 
 partiess(testquestions,testrep,testrepcorr,testpoint)
+kk
