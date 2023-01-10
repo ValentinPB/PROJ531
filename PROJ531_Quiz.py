@@ -64,18 +64,3 @@ if len(questions) != len(timers) :      #Verification de la cohérence entre le 
 
 if bon :        #Si aucun problème n'a été detecté.
     print('Aucun problème détecté.')
-<<<<<<< HEAD
-=======
-
-
-#with open('C:\Users\Valentin\Documents\GitHub\PROJ531\Quizs\QuizTest.txt') as q :
-#    content = q.readlines()
-#close(q)
-
-#print(content)
-
-
-
-
-
->>>>>>> b25708df9bd716234015f9b49be29c702c4bc7af
