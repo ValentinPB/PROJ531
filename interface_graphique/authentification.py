@@ -6,7 +6,7 @@ Created on Thu Jan  5 09:41:14 2023
 """
 import hashlib
 
-with open(r'D:\IDU\PROJ531\Utilisateurs\utilisateurs.txt','r') as u :
+with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\utilisateurs.txt','r') as u :
     content = u.readlines()
 u.close()
 print(content)

@@ -4,7 +4,7 @@ Created on Tue Jan 10 08:37:49 2023
 
 @author: chafi
 """
-
+import authentification as aut
 from tkinter import *
 global fenetre1, fenetre2
 
@@ -19,13 +19,18 @@ def fenetre():
     
 
 
-
-
     def getEntry():
         Id = entree_name.get()
         mdp = password_entry.get()
-        return (Id)
-    
+        connect = aut.authentification(Id, mdp)
+        if connect:
+            app.destroy()
+        else:
+            bjr = Label(app, text="pppppppppppppppppppppppppppp")
+            bjr.pack()
+
+
+
     
     fenetre1= Tk ()
     obj = Label(fenetre1,text = "bonjour")
