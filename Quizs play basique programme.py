@@ -1,9 +1,9 @@
 class quiz:
     def __init__(self,questions,rep,repcorr,point):
-        self.questions=questions
-        self.rep=rep
-        self.repcorr=repcorr
-        self.point=point
+        self.questions=questions                        # liste questions 
+        self.rep=rep                                    #liste de liste de réponses pour chaque questions 
+        self.repcorr=repcorr                            # liste avec binaire qui indique la position des bonne réponse 
+        self.point=point                                #nombre de point de la question 
         
     def affichequestion(self,numeros):
         print (self.questions[numeros] )
@@ -21,9 +21,6 @@ class quiz:
     
     def donner_une_rep(self,numeros):
         reponse_user=input('reponse')
-        
-       
-       
         return int(reponse_user)
 
 
@@ -39,7 +36,7 @@ class quiz:
 
 
     
-    def partie(self):
+    def partiebasique(self):
         score=0
         for k in range(0,len(self.questions)):
             self.affichequestion(k)
@@ -67,3 +64,4 @@ testpoint=[1, 2]
 testquiz=quiz(testquestions,testrep,testrepcorr,testpoint)
 
 testquiz.partie()
+h=2
