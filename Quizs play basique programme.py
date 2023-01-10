@@ -24,20 +24,18 @@ class quiz:
     
     def donner_une_rep(self):
         
-        return input('liste réponse correcte')
+        return input('liste réponses choisi')
 
 
-    def comparaison_rep(self,rep_user,numeros):
-        if self.repcorr[numeros][rep_user-1]==1:
-            print(True)
+     
+    def comparaisonreponse(self,reponse_user,numerosquestion):
+        if self.afficherepcorrect(numerosquestion)==reponse_user:
+            print('oui')
             return True
-
         else:
-            print(False, "True answer is")
-            self.afficherepcorrect(numeros)  
-            return False  
-
-
+            print('False la reponse est:')
+            self.afficherepcorrect(numerosquestion)   
+            return False 
     
     def partiebasique(self):
         score=0
@@ -46,28 +44,24 @@ class quiz:
             self.afficherep(k)
             
             
+            test = self.donner_une_rep()
+           
             
-            if self.comparaison_rep(self.donner_une_rep(k),k)==True:
+            if self.comparaisonreponse(test,k):
                 score=score+int(self.point[k])
         print(score)
     
-    def __str__(self):
-        return self.rep, self.questions
-    
-    def __repr__(self):
-        return self.__str__()
-            
+ 
 
 
 testquestions = ['q1', 'Q2']
 testrep = [['r11', 'r21'], ['r21', 'r22', 'r23', 'r24']]
-testrepcorr = [[0,1], [0,0,1,1]]
+testrepcorr = [[1,1], [0,0,1,1]]
 testpoint=[1, 2]
 testtemps=[30,45]
 
 testquiz=quiz(testquestions,testrep,testrepcorr,testpoint,testtemps)
-testquiz.afficherepcorrect(1)
-r=testquiz.donner_une_rep()
-print(r)
-#testquiz.partie()
+
+testquiz.comparaisonreponse([1,2],0)
+testquiz.partiebasique()
 
