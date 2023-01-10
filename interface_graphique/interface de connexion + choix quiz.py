@@ -8,39 +8,52 @@ import authentification as aut
 from tkinter import *
 global fenetre1, fenetre2
 
-def test():
-    global fenetre1, fenetre2
-    fenetre1.destroy()
-    choix_quiz()
+
+    
+    
+"""def test():
+    global fenetre1 ,fenetre2
+    Id = entree_name.get()
+    mdp = password_entry.get()
+    connect = aut.authentification(Id, mdp)
+    if connect:
+        fenetre1.destroy()
+    else:
+        bjr = Label(app, text="pppppppppppppppppppppppppppp")
+        bjr.pack()
+    choix_quiz()"""
+
 
 def fenetre():
     global fenetre1
     
     
 
-
-    def getEntry():
+    def test():
+        global fenetre1 ,fenetre2
         Id = entree_name.get()
         mdp = password_entry.get()
         connect = aut.authentification(Id, mdp)
         if connect:
-            app.destroy()
+            fenetre1.destroy()
         else:
             bjr = Label(app, text="pppppppppppppppppppppppppppp")
             bjr.pack()
+        choix_quiz()
+    
 
 
 
     
     fenetre1= Tk ()
-    obj = Label(fenetre1,text = "bonjour")
+    obj = Label(fenetre1,text = "Bonjour")
     
     name_user =Label( fenetre1,text ="nom d'utilisateur")
     name_user.pack()
-    entree_name = Entry()
+    entree_name = Entry(fenetre1)
     entree_name.pack()
     psw= Label(fenetre1,text = "mot de passe")
-    password_entry = Entry()
+    password_entry = Entry(fenetre1)
     psw.pack()
     password_entry.pack()
     
@@ -48,7 +61,7 @@ def fenetre():
     bouton_connexion.pack()
     
     obj.pack()
-    obj.place(x=10, y=50)
+    obj.place(x=10, y=10 , anchor='ne')
     fenetre1.geometry("800x900")
     
     fenetre1.mainloop()
@@ -63,6 +76,8 @@ def fenetre():
 
 def choix_quiz():
     global fenetre2
+    def test():
+        choix_quiz()
     fenetre2 = Tk()
     champ_label = Label(fenetre2, text="choisir un quiz")
     champ_label.place(x=10, y=10 , anchor='ne')
