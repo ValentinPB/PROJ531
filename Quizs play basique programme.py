@@ -67,6 +67,7 @@ class quiz:
             self.affichequestion(k)
             self.afficherep(k)
             self.affichetemps(k)
+            
             tdepart=time.time()
             
             
@@ -76,20 +77,23 @@ class quiz:
                 deltat=int(tfin-tdepart)
                 print(deltat,'seconde') 
                 if deltat<self.affichetemps(k):
+                    pointquestion=int(self.point[k])
+                    tempsquestion=int(self.affichetemps(k))
+                    point=pointquestion*(tempsquestion-deltat)/tempsquestion
 
-                    score=score+int(self.point[k])
+                    score=score+point
                 else:
                     print('temps écoulé')
-        print(score)
+        print(int(score))
 
 
 testquestions = ['q1', 'Q2']
 testrep = [['r11', 'r21'], ['r21', 'r22', 'r23', 'r24']]
 testrepcorr = [[1,1], [0,0,1,1]]
-testpoint=[1, 2]
+testpoint=[50, 70]
 testtemps=[10,10]
 
 testquiz=quiz(testquestions,testrep,testrepcorr,testpoint,testtemps)
 
-#testquiz.partiesanstemps()
 testquiz.partieavectemps()
+
