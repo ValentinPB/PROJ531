@@ -1,15 +1,38 @@
 ##PROJ531 Quiz Création fichier
 
-def CreateFile(titre) :
+import os
+path = 'C:\\Users\\Valentin\\Documents\\GitHub\\PROJ531\\Quizs\\'
+
+def CreateQuizFile(titre, questions, reponses, corrections, points, timers) :
     path = r'C:\Users\Valentin\Documents\GitHub\PROJ531\Quizs'
     fileInfo = path + titre + '.txt'
     pass
 
 def FileAlreadyExists(titre) :
-    return(False)
-
-def FillFile(titre, questions, reponses, corrections, scores, timers) :
-    pass
+    #première partie de ce code n'a pas marché.
+    '''path = 'C:\\Users\\Valentin\\Documents\\GitHub\\PROJ531\\Quizs\\'       #double backslashs car si backslash tout seul, tout explose.
+    path.replace(path[-1], '')      #suppression des backslashs en trop
+    fileInfo = path + titre + '.txt'
+    print(fileInfo)
+    try :
+        with open(fileInfo) as wtvr :
+            wtvr.close()
+        return(True)
+    except FileNotFoundError :
+        return(False)'''
+    #partie du code fonctionnelle
+    files = []
+    for root, dirs, files in os.walk(path):
+        for name in files:
+            #print(name)
+            if name.endswith((".txt")):
+                files.append(name)
+            break
+        break
+    if titre + '.txt' in files :
+        return(True)
+    else :
+        return(False)
 
 def IsAdmin() :
     pass
@@ -25,9 +48,9 @@ def MakeQuiz() :
         points = []
         timers = []
         etapequestions = True
-        etapecorr = True
+        '''etapecorr = True
         etapesco = True
-        etapetim = True
+        etapetim = True'''
         #Rentrée des questions :
         print('Ecrivez vos questions les unes après les autres ! Si vous avez rentré toutes vos questions, écrivez "suivant" pour passer à la suite.')
         while etapequestions :
