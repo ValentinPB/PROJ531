@@ -28,6 +28,7 @@ def MakeQuiz() :
         etapecorr = True
         etapesco = True
         etapetim = True
+        #Rentrée des questions :
         print('Ecrivez vos questions les unes après les autres ! Si vous avez rentré toutes vos questions, écrivez "suivant" pour passer à la suite.')
         while etapequestions :
             q = input()
@@ -38,6 +39,7 @@ def MakeQuiz() :
                     etapequestions = False
             else :
                 questions.append(q)
+        #Rentrée des réponses :
         print('Maintenant, écrivez les réponses aux questions ! Pour changer de question, écrivez "suivant". Si vous avez rentré toutes vos réponses, écrivez "suivant" pour passer à la suite.')
         for i in range(len(questions)) :
             print('Vous écrivez les réponses pour la question n°', i, ' : ', questions[i])
@@ -46,29 +48,61 @@ def MakeQuiz() :
             while subetaperep :
                 r = input()
                 if r == 'suivant' :
-                    if len(subreponses) <= 1 :
+                    if len(subreponses) <= 1 :      #si l'utilisateur n'a pas rentré assez de réponses
                         print('Vous devez rentrer au moins deux réponses !')
                     else :
                         subetaperep = False
                 else :
                     subreponses.append(r)
             reponses.append(subreponses)
+        #Rentrée des corrections :
         print('Maintenant, donnez la réponse juste pour chaque question. Ecrivez "oui" si la réponse présentée est la bonne, ou "non" si ça ne l''est pas.')
         for i in range(len(reponses)) :
             print('Pour la question : "', questions[i], '", quelle est la bonne réponse ?')
             subcorr = []
+            bonnereptrouvee = False
             for j in range(len(reponses[i])) :
-                if j == len(reponses) - 1 :
-                    print('La dernière réponse a été automatiquement désignée correcte.')
-                    subcorr.append(1)
+                if bonnereptrouvee :
+                    subcorr.append(0)
                 else :
-                    print('Est-ce la réponse : "', reponses[i][j], '" ?')
-                    c = input()
-                    if c == 'non' :
-                        subcorr.append(0)
-                    else :
+                    if j == len(reponses[i]) - 1 :
+                        print('La dernière réponse a été automatiquement désignée correcte.')
                         subcorr.append(1)
-                        break
+                    else :
+                        print('Est-ce la réponse : "', reponses[i][j], '" ?')
+                        c = input()
+                        if c == 'non' :         #Si l'utilisateur rentre quoi que ce soit d'autre que "non", ce sera considéré comme une bonne réponse.
+                            subcorr.append(0)
+                        else :
+                            subcorr.append(1)
+                            bonnereptrouvee = True
             corrections.append(subcorr)
-        print('fin temp')
-        return(titre, questions, reponses, corrections)
+        #Rentreé des points :
+        print('Votre quiz est bientôt fini ! Vous allez maintenant rentrer les points à gagner pour chaque question. Pour une question sans points, rentrez "0".')
+        for i in range(len(questions)) :
+            print('Combien de points doit rapporter la question : "', questions[i], '" ?')
+            RepIsInt = False
+            while not(RepIsInt) :
+                try :
+                    p = int(input())            #forcer l'utilisateur à rentrer un entier
+                    points.append(p)
+                    RepIsInt = True
+                except ValueError :
+                    print('Vous devez rentrer un nombre !')
+        #Rentrée des timers :
+        print('Pour finir, rentrez les timers de chaque question en secondes ! Pour donner un temps illimité à une question, rentrez simplement "0".')
+        for i in range(len(questions)) :
+            print('Quel est le timer de la question : "', questions[i], '" ?')
+            RepIsInt = False
+            while not(RepIsInt) :
+                try :
+                    t = int(input())            #forcer l'utilisateur à rentrer un entier
+                    timers.append(t)
+                    RepIsInt = True
+                except ValueError :
+                    print('Vous devez rentrer un nombre !')
+        #Résultats
+        print('\nParfait ! Votre quiz est terminé, voilà le récapitulatif :')
+        print('Le titre du quiz est : ', titre, '\nLes questions sont : ', questions, '\nLes réponses sont : ', reponses, '\nLes réponses correctes sont : ', corrections, '\nLes scores des questions sont : ', points, '\nLes timers des questions sont : ', timers)
+        print('\n')
+        return(titre, questions, reponses, corrections, points, timers)
