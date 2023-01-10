@@ -1,3 +1,4 @@
+import time
 class quiz:
     def __init__(self,questions,rep,repcorr,point,temps):
         self.questions=questions                        # liste questions 
@@ -21,47 +22,74 @@ class quiz:
                 
         print(Listebonnerep)
         return Listebonnerep
+    def affichetemps(self,numeros):
+        print(self.temps[numeros],'seconde pour répondre')
+        return (self.temps[numeros])
     
     def donner_une_rep(self):
+        Lint=[]
+        Lstr=input('réponses choisi forme n1,n2,n3')
+        for k in range(0,len(Lstr)):
+            if k%2==0:
+                Lint.append(int(Lstr[k]))
+      
+        return Lint
         
-        return input('liste réponses choisi')
 
 
      
     def comparaisonreponse(self,reponse_user,numerosquestion):
         if self.afficherepcorrect(numerosquestion)==reponse_user:
-            print('oui')
+            print('oui bonne reponse')
             return True
         else:
             print('False la reponse est:')
             self.afficherepcorrect(numerosquestion)   
             return False 
     
-    def partiebasique(self):
+    def partiesanstemps(self):
         score=0
         for k in range(0,len(self.questions)):
             self.affichequestion(k)
             self.afficherep(k)
             
             
-            test = self.donner_une_rep()
-           
+            Reponse=self.donner_une_rep()
             
-            if self.comparaisonreponse(test,k):
+            
+            if self.comparaisonreponse(Reponse,k)==True:
                 score=score+int(self.point[k])
         print(score)
     
- 
+    def partieavectemps(self):
+        score=0
+        for k in range(0,len(self.questions)):
+            self.affichequestion(k)
+            self.afficherep(k)
+            self.affichetemps(k)
+            tdepart=time.time()
+            
+            
+
+            if self.comparaisonreponse(self.donner_une_rep(),k)==True :
+                tfin=time.time()
+                deltat=int(tfin-tdepart)
+                print(deltat,'seconde') 
+                if deltat<self.affichetemps(k):
+
+                    score=score+int(self.point[k])
+                else:
+                    print('temps écoulé')
+        print(score)
 
 
 testquestions = ['q1', 'Q2']
 testrep = [['r11', 'r21'], ['r21', 'r22', 'r23', 'r24']]
 testrepcorr = [[1,1], [0,0,1,1]]
 testpoint=[1, 2]
-testtemps=[30,45]
+testtemps=[10,10]
 
 testquiz=quiz(testquestions,testrep,testrepcorr,testpoint,testtemps)
 
-testquiz.comparaisonreponse([1,2],0)
-testquiz.partiebasique()
-
+#testquiz.partiesanstemps()
+testquiz.partieavectemps()
