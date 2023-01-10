@@ -6,7 +6,7 @@ Created on Thu Jan  5 09:41:14 2023
 """
 import hashlib
 
-with open(r'C:\Users\chafi\OneDrive\Bureau\PROJ531\Utilisateurs\utilisateurs.txt','r') as u :
+with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\Utilisateurs\utilisateurs.txt','r') as u :
     content = u.readlines()
 u.close()
 print(content)
@@ -23,7 +23,8 @@ def authentification(Id, password):
         j+=1
         print(USER)
         if USER != Id and j== len(content)-1:
-            raise ValueError("ce nom d'utilisateur n'existe pas")
+            #raise ValueError("ce nom d'utilisateur n'existe pas")
+            return False
     while content[j-1][i+1] !=',':
             MDP += content[j-1][i+1]
             i += 1
@@ -40,9 +41,9 @@ def authentification(Id, password):
 
 def NEW_ACCOUNT(USER, MDP):
     
-    with open(r'C:\Users\chafi\OneDrive\Bureau\PROJ531\Utilisateurs\utilisateurs.txt','a') as file :
+    with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\Utilisateurs\utilisateurs.txt','a') as file :
         HASH= hashlib.sha256( MDP.encode('utf-8')).hexdigest()
-        file.write('\n' + USER +',' + HASH +',0;')
+        file.write('\n' + USER +',' + HASH +',;')
         file.close()
 
 
