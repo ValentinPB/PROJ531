@@ -8,41 +8,45 @@ def ajout_question():
     def valid_question():
         a = question_entre.get()
         Questions.append(a)
-        Reponses.append(reponse_question)
-        print(reponse_question)
-        reponse_question = []
+        Reponses.append(L)
+        print(L)
+        L = []
         print(Questions, Reponses)
     
-    time = temps.get()
-    pointe = points.get()
 
 
-    if len(Questions)==0:
+    if len(Questions)==0 and question_entrez.get() != '':
         Questions.append(question_entrez.get())
+        Reponses.append(L)
+        print(L)
+        L = []
 
-    
-    if time =='' or pointe == '' or reponse == '':
-        error = Label(frame, text="ajoutez un temps, ou un score à la question")
-        error.pack()
+
+    elif len(Questions)==0 and question_entrez.get() == '':
+        erreur_pas_question = Label(frame, text="vous n'avez pas entré de question")
+        erreur_pas_question.pack()
+
     else:
+
         question = Label(frame, text="Ajoutez votre question")
         question.pack()
         question_entre = Entry(frame)
         question_entre.pack()
         
-        timer.append(time)
-        Score.append(pointe)
-
 
         temps_a_mettre= Label(frame, text='rentrer le temps que vous voulez pour cette question')
         temps = Entry(frame)
+        bouton_temps = Button(frame, text='valider_temps', command=valid_temps)
         temps_a_mettre.pack()
         temps.pack()
+        bouton_temps.pack()
 
         points_a_mettre = Label(frame, text='combien de point souhaitez vous affecter à cette question')
         points = Entry(frame)
+        bouton_point = Button(frame, text='valider points', command=valid_point)     
         points_a_mettre.pack()
         points.pack()
+        bouton_point.pack()
 
         reponse = Label(frame,text="ajout reponse")
         reponse_possible= Entry(frame)
@@ -56,8 +60,8 @@ def ajout_reponse():
 
     def pas_idee():
         a=reponse_possible.get()
-        reponse_question.append(a)
-        print(reponse_question)
+        L.append(a)
+        print(L)
         bouton_valid.destroy()
 
     reponse = Label(frame,text="ajout reponse")
@@ -75,24 +79,34 @@ def getTitre():
         fonctionne_pas.pack()
     else :
         recuperer_donner.destroy()
-"""""
+
 def valid_temps():
     le_temps = temps.get()
-    timer.append(le_temps)
-    print(timer)
+    if len(le_temps) == 0:
+        erreur_temps_vide = Label(frame, text="vous n'avez pas définie de temps pour la question")
+        erreur_temps_vide.pack()
+    else:
+        timer.append(le_temps)
+        print(timer)
+        bouton_temps.destroy()
 
 def valid_point():
     nbr_point = points.get()
-    Score.append(nbr_point)
-    print(Score)"""
-#
+    if len(nbr_point) == 0:
+        erreur_nbre_point = Label(frame, text="vous n'avez pas définie le nombre de point")
+        erreur_nbre_point.pack()
+    else:
+        Score.append(nbr_point)
+        print(Score)
+        bouton_point.destroy()
+
 root = Tk()
 frame = Frame(root)
 frame.pack()
 
 #on définit des liste pour stocker les informations qui nous intéresse
 Questions=[]
-reponse_question=[]
+L=[]
 Reponses=[]
 REP_Correct=[]
 timer=[]
@@ -122,17 +136,17 @@ button_ajout_reponse = Button(frame, text="ajoutez des réponse", command=ajout_
 
 temps_a_mettre= Label(frame, text='rentrer le temps que vous voulez pour cette question')
 temps = Entry(frame)
-#bouton_temps = Button(frame, text='valider_temps', command=valid_temps)
+bouton_temps = Button(frame, text='valider_temps', command=valid_temps)
 temps_a_mettre.pack()
 temps.pack()
-#bouton_temps.pack()
+bouton_temps.pack()
 
 points_a_mettre = Label(frame, text='combien de point souhaitez vous affecter à cette question')
 points = Entry(frame)
-#bouton_point = Button(frame, text='valider points', command=valid_point)
+bouton_point = Button(frame, text='valider points', command=valid_point)
 points_a_mettre.pack()
 points.pack()
-#bouton_point.pack()
+bouton_point.pack()
 
 button_ajout_question = Button(frame, text="ajoutez des questions", command=ajout_question)
 button_ajout_reponse.pack()
