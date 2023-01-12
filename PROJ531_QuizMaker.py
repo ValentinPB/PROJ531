@@ -1,7 +1,21 @@
 ##PROJ531 Quiz Création fichier
 
 import os
-path = 'C:\\Users\\Valentin\\Documents\\GitHub\\PROJ531\\Quizs\\'
+from inspect import getsourcefile
+path = os.path.abspath(getsourcefile(lambda:0))
+path = path[::-1]
+c = 0
+while path[c] != '\\' :
+    c = c+1
+    #print(c, path[c])
+#print(path)
+for i in range(c) :
+    path = path.replace(path[0], '', 1)
+    #print(path)
+path = path[::-1]
+path = path + 'Quizs\\'
+#print(path)
+
 
 def CreateQuizFile(titre, questions, reponses, corrections, points, timers) :
     fileInfo = path + titre + '.txt'
