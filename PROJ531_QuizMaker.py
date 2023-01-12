@@ -72,7 +72,7 @@ def IsAdmin() :
     pass
 
 def MakeQuiz() :
-    titre = input('Quel est le titre du Quiz ?\n')
+    titre = input('Quel est le titre du Quiz ? ATTENTION : Votre titre ne peut pas comporter de points-virgules.\n')
     while FileAlreadyExists(titre) :
         print('Ce quiz existe déjà ! Si vous voulez supprimer le quiz existant pour en créer un nouveau, écrivez "supprimer". Pour changer de titre, écrivez simplement votre nouveau titre. Pour annuler la création, écrivez "annuler".')
         Ntitre = input()
@@ -94,7 +94,7 @@ def MakeQuiz() :
     etapesco = True
     etapetim = True'''
     #Rentrée des questions :
-    print('Ecrivez vos questions les unes après les autres ! Si vous avez rentré toutes vos questions, écrivez "suivant" pour passer à la suite.')
+    print('Ecrivez vos questions les unes après les autres ! Si vous avez rentré toutes vos questions, écrivez "suivant" pour passer à la suite. ATTENTION : Vos questions ne peuvent pas comporter de virgules NI de points-virgules.')
     while etapequestions :
         q = input()
         if q == 'suivant' :
@@ -105,7 +105,7 @@ def MakeQuiz() :
         else :
             questions.append(q)
     #Rentrée des réponses :
-    print('Maintenant, écrivez les réponses aux questions ! Pour changer de question, écrivez "suivant". Si vous avez rentré toutes vos réponses, écrivez "suivant" pour passer à la suite.')
+    print('Maintenant, écrivez les réponses aux questions ! Pour changer de question, écrivez "suivant". Si vous avez rentré toutes vos réponses, écrivez "suivant" pour passer à la suite. ATTENTION : Vos réponses ne peuvent pas comporter de virgules NI de points-virgules NI de points.')
     for i in range(len(questions)) :
         print('Vous écrivez les réponses pour la question n°', i, ' : ', questions[i])
         subetaperep = True
@@ -121,26 +121,23 @@ def MakeQuiz() :
                 subreponses.append(r)
         reponses.append(subreponses)
     #Rentrée des corrections :
-    print('Maintenant, donnez la réponse juste pour chaque question. Ecrivez "oui" si la réponse présentée est la bonne, ou "non" si ça ne l''est pas.')
+    print('Maintenant, donnez les réponses justes pour chaque question. Ecrivez "oui" si la réponse présentée est bonne, ou "non" si elle est fausse.')
     for i in range(len(reponses)) :
-        print('Pour la question : "', questions[i], '", quelle est la bonne réponse ?')
+        print('Pour la question : "', questions[i], '", quelle sont les bonnes réponses ?')
         subcorr = []
-        bonnereptrouvee = False
+        AuMoinsUneJuste = False
         for j in range(len(reponses[i])) :
-            if bonnereptrouvee :
-                subcorr.append(0)
+            if j == len(reponses[i]) - 1 and not(AuMoinsUneJuste) :
+                print('La dernière réponse a été automatiquement désignée correcte.')
+                subcorr.append(1)
             else :
-                if j == len(reponses[i]) - 1 :
-                    print('La dernière réponse a été automatiquement désignée correcte.')
-                    subcorr.append(1)
+                print('La réponse : "', reponses[i][j], '" est-elle correcte ?')
+                c = input()
+                if c == 'non' :         #Si l'utilisateur rentre quoi que ce soit d'autre que "non", ce sera considéré comme une bonne réponse.
+                    subcorr.append(0)
                 else :
-                    print('Est-ce la réponse : "', reponses[i][j], '" ?')
-                    c = input()
-                    if c == 'non' :         #Si l'utilisateur rentre quoi que ce soit d'autre que "non", ce sera considéré comme une bonne réponse.
-                        subcorr.append(0)
-                    else :
-                        subcorr.append(1)
-                        bonnereptrouvee = True
+                    subcorr.append(1)
+                    AuMoinsUneJuste = True
         corrections.append(subcorr)
     #Rentreé des points :
     print('Votre quiz est bientôt fini ! Vous allez maintenant rentrer les points à gagner pour chaque question. Pour une question sans points, rentrez "0".')
