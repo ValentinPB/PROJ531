@@ -46,7 +46,7 @@ def NEW_ACCOUNT(USER, MDP):
         file.close()
         
 def est_admin(Id, password):
-    with open(r'D:\IDU\PROJ531\interface_graphique\admin.txt','r') as admin_log :
+    with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\admin.txt','r') as admin_log :
         log = admin_log.readlines()
     admin_log.close()
 
