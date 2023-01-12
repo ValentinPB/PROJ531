@@ -1,7 +1,18 @@
 from tkinter import *
 from PROJ531_QuizMaker import *
 
-
+global Questions
+Questions=[]
+global L
+L=[]
+global Responses
+Reponses=[]
+global REP_Correct
+REP_Correct=[]
+global timer
+timer=[]
+global Score
+Score=[]
 
 def ajout_question():
 
@@ -52,7 +63,7 @@ def ajout_question():
         reponse_possible= Entry(frame)
         reponse.pack()
         reponse_possible.pack()
-        bouton_question_valide= Button(frame, text="valider question", command=valid_question)
+        bouton_question_valide= Button(frame, text="valider question", command=valid_question(L, Questions))
         bouton_question_valide.pack()
 
 
@@ -105,12 +116,7 @@ frame = Frame(root)
 frame.pack()
 
 #on définit des liste pour stocker les informations qui nous intéresse
-Questions=[]
-L=[]
-Reponses=[]
-REP_Correct=[]
-timer=[]
-Score=[]
+
 
 #on demande à l'utilisateur de rentrez un titre du quizz
 titre_quizz = Label(frame, text="Titre de votre quizz")
@@ -123,13 +129,15 @@ recuperer_donner.pack()
 
 question1 = Label(frame, text="Ajoutez votre question")
 question_entrez = Entry(frame)
+'''
 reponse = Label(frame,text="ajout reponse")
-reponse_possible= Entry(frame)
+reponse_possible= Entry(frame)'''
 
 question1.pack()
 question_entrez.pack()
+'''
 reponse.pack()
-reponse_possible.pack()
+reponse_possible.pack()'''
 
 
 button_ajout_reponse = Button(frame, text="ajoutez des réponse", command=ajout_reponse)
