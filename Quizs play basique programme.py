@@ -171,7 +171,9 @@ class quizz:
             bouton2 = Button(app, text='réponse2' , command=Listerep.append(2))
             bouton3 = Button(app, text='réponse3' , command=Listerep.append(3))
             bouton4 = Button(app, text='réponse4' , command=Listerep.append(4))
+            print(Listerep)
             
+            print(Listerep)
             bouton1.pack()
             bouton2.pack()
             bouton3.pack()
@@ -182,7 +184,7 @@ class quizz:
             app.mainloop()
             
             #time.sleep(2)
-            app.destroy
+            
             
             if self.comparaisonreponse(Listerep,k)==True :
                 tfin=time.time()
