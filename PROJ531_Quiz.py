@@ -1,6 +1,16 @@
 ##PROJ531 Quiz
 
-path = 'C:\\Users\\Valentin\\Documents\\GitHub\\PROJ531\\Quizs\\'
+import os
+from inspect import getsourcefile
+path = os.path.abspath(getsourcefile(lambda:0))
+path = path[::-1]
+c = 0
+while path[c] != '\\' :
+    c = c+1
+for i in range(c) :
+    path = path.replace(path[0], '', 1)
+path = path[::-1]
+path = path + 'Quizs\\'
 
 #Lecture du fichier
 
