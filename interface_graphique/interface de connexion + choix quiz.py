@@ -25,7 +25,7 @@ global fenetre1, fenetre2,administrateur
     choix_quiz()"""
 
 
-def fenetre():
+def fenetre():  #c'est la fenetre d'accueil pour se connecter en etant joueur
     global fenetre1
     
     
@@ -61,6 +61,8 @@ def fenetre():
     
     
     obj = Label(fenetre1,text = "Bonjour")
+    titre= Label(fenetre1, text= "QIz", relief=RAISED, font=('broadway', 18),fg='green',wraplength=150)
+    titre.pack()
     
     name_user =Label( fenetre1,text ="nom d'utilisateur")
     name_user.pack()
@@ -89,7 +91,7 @@ def fenetre():
     bouton.pack()
     fenetre1.mainloop()"""
 
-def choix_quiz():
+def choix_quiz(): #c'est la fentre qui propose tout les quiz existant
     global fenetre2
     def test(): # a modifier selon quel fenetre on veut ouvrir
         choix_quiz()
@@ -106,7 +108,7 @@ def choix_quiz():
     fenetre2.geometry("800x900")
     fenetre2.mainloop()
     
-def page_auth_administrateur():
+def page_auth_administrateur(): #cette fentre permet à l'admin de se connecter 
     global auth_administrateur
     def test3():
         global auth_administrateur , admin
@@ -143,7 +145,7 @@ def page_auth_administrateur():
     auth_administrateur.geometry("800x900")
     auth_administrateur.mainloop()
     
-def page_admin():
+def page_admin(): #cette fenetre permet d'ajouter des questions etc...
     global admin
     admin=Tk()
     admin.geometry("800x900")
