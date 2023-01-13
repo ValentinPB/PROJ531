@@ -1,0 +1,1 @@
+Notre Projet;Qui est le Product Owner ?,Comment avons-nous communiqué ?,Qui s'est occupé du système d'utilisateurs ?;Yassir.Colin.Valentin.Loïs,Discord.Oralement.Trello.Messenger,Yassir & Colin.Valentin & Loïs;0.0.1.0,1.1.1.0,1.0;30,30,50;15,15,20

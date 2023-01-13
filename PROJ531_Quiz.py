@@ -1,5 +1,6 @@
 ##PROJ531 Quiz
 
+#Ce code ci-dessous récupère le chemin des fichiers sur n'importe quelle machine
 import os
 from inspect import getsourcefile
 path = os.path.abspath(getsourcefile(lambda:0))
@@ -12,8 +13,8 @@ for i in range(c) :
 path = path[::-1]
 path = path + 'Quizs\\'
 
-#Lecture du fichier
 
+#Lecture du fichier
 def ExploitationFichier(titre) :
     fileInfo = path + titre + '.txt'
     with open(fileInfo) as q :
@@ -55,14 +56,14 @@ def ExploitationFichier(titre) :
 #Affichage des informations du Quiz :
 def LectureFichier(titre) :
     files = []
-    for root, dirs, files in os.walk(path):
+    for root, dirs, files in os.walk(path):     #parcours de tous les fichiers dans le dossier Quizs
         for name in files:
             #print(name)
-            if name.endswith((".txt")):
+            if name.endswith((".txt")):         #Ajout de tous les fichiers qui se terminent par .txt
                 files.append(name)
             break
         break
-    if titre + '.txt' not in files :
+    if titre + '.txt' not in files :            #vérification de l'existence du fichier
         print("Ce fichier n'existe pas.")
     else :
         titre, questions, reponses, reponsescorrectes, scores, timers = ExploitationFichier(titre)
@@ -72,7 +73,7 @@ def LectureFichier(titre) :
 #Vérification d'incohérences :
 def VerifIncoherences(titre) :
     files = []
-    for root, dirs, files in os.walk(path):
+    for root, dirs, files in os.walk(path):         #Vérification d'existence
         for name in files:
             #print(name)
             if name.endswith((".txt")):
