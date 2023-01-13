@@ -70,7 +70,6 @@ def est_admin(Id, password):
     HASH = hashlib.sha256( password.encode('utf-8')).hexdigest()
     
     if MDP == HASH:
-        print('Bon')
         return True
     else:
         return False

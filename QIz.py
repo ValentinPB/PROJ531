@@ -105,8 +105,11 @@ def nouveau_compte():
         ajouter_le_compte = uti.NEW_ACCOUNT(Id, mdp)
         print('compte ajouter')
     global nouveau
-    
-    
+     
+    def test():
+        global nouveau, fenetre1
+        nouveau.destroy()
+        fenetre()
     
     
     nouveau= Tk ()
@@ -116,7 +119,7 @@ def nouveau_compte():
     nouveau.title('QIz')
     menu= Menu(nouveau)
     new_item = Menu(menu)
-    new_item.add_command(label='accueil')
+    new_item.add_command(label='accueil', command=test)
     new_item.add_separator()
     menu.add_cascade(label='Fichier' , menu=new_item)
     nouveau.config(menu=menu)
@@ -191,10 +194,7 @@ def page_choix_quiz(): #c'est la fentre qui propose tout les quiz existant
     
 
     
-    '''bouton = Button(fenetre2,text="quiz1", command=test)
-    bouton.pack()
-    bouton2 = Button(fenetre2,text="quiz2", command=test)
-    bouton2.pack()'''
+    
     
     fenetre2.geometry("800x900")
     fenetre2.mainloop()
@@ -262,15 +262,9 @@ def page_admin(): #cette fenetre permet d'ajouter des questions etc...
 def page_creer_quiz(): #c'est la fenetre qui va permettre de creer de nouveaux quiz si on est admin
     global creer_quiz
     import essai
-    """creer_quiz = Tk()
-    creer_quiz.title('QIz')
-    creer_quiz.geometry("800x900")
-    creer_quiz.mainloop()"""
-
+    
 def page_quiz(titre):
     global quiz
-    """quiz = Tk()
-    quiz.title('QIz')"""
     import Quizs_play_basique_programme as Quizs # on doit le mettre dans le meme fichier avec les _
     
 if __name__ == '__main__':
