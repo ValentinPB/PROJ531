@@ -8,39 +8,45 @@ class Application(Tk):
         self.creer_widgets()
 
     def creer_widgets(self):
-        #question_suiv = "question"
+       
         self.label = Label(self, text="Quizz")
-        #self.bouton = Button(self, text= question_suiv, command=self.question_suivante)
+        
         self.entry= Entry()
         self.label.pack()
-        #self.bouton.pack()
+        
    
     def bt1 (self,Liste):
-        Liste.append(1)
+        """
+        fonction du bouton qui quand on l'appelle rajoute ou enleve un suivant si 1 est ou n'est pas dans la liste 
+        """
+        if 1 not in Liste:
+            Liste.append(1)
+        else :
+            Liste.remove(1)
     def bt2 (self,Liste):
-        Liste.append(2)
+        if 2 not in Liste:
+            Liste.append(2)
+        else :
+            Liste.remove(2)
     def bt3 (self,Liste):
-      
-        Liste.append(3)
+        if 3 not in Liste:
+            Liste.append(3)
+        else :
+            Liste.remove(3)
     def bt4 (self,Liste):
+        if 4 not in Liste:
         
+            Liste.append(4)
+        else :
+            Liste.remove(4)
         
-        Liste.append(4)
-        
-    def btV(self):
-        Tfin=time.time()
-        self.destroy
-        return Tfin
     
+    
+        
 
 
 
-    def get_entry(self,reponse_entry):
-        r=reponse_entry.get()
-        self.destroy()
-        print(r)
-    def question_suivante(self):
-        pass
+   
 class quizz:
      
     def __init__(self,questions,rep,repcorr,point,temps):
@@ -85,17 +91,7 @@ class quizz:
         
         return (self.temps[numeros])
     
-    def convertir_rep_str_list(self,reponsestr):
-        """
-        fonction demandant à l'utilisateur de rentrer une réponse
-        """
-        Lint=[]
-       
-        for k in range(0,len(reponsestr)):
-            if k%2==0:
-                Lint.append(int(reponsestr[k]))
-      
-        return Lint
+    
         
 
 
@@ -111,22 +107,7 @@ class quizz:
             
             return False 
     
-    def partiesanstemps(self):
-        """
-        permet de jouer une partie sans prendre le temps en compte 
-        """
-        score=0
-        for k in range(0,len(self.questions)):
-            self.affichequestion(k)
-            self.afficherep(k)
-            
-            
-            Reponse=self.donner_une_rep()
-            
-            
-            if self.comparaisonreponse(Reponse,k)==True:
-                score=score+int(self.point[k])
-        print(score)
+    
     
     def partieavectemps(self):
         """
@@ -134,97 +115,126 @@ class quizz:
         """
         
         
-        score=0
-        for k in range(0,len(self.questions)):
-            app = Application()
+        score=0                   #initialise score a 0 point
+        for k in range(0,len(self.questions)): # fait tourner pour chaque question du quiz
+            app = Application()     #fait une page 
             app.geometry("800x600")
-            question= Label(app, text=self.affichequestion(k))
+            question= Label(app, text=self.affichequestion(k)) #affiche la question 
             question.pack()
-            reponse = Label(app, text=self.afficherep(k))
+            reponse = Label(app, text=self.afficherep(k)) #affiche reponse posssible 
             reponse.pack()
-           
-            temps= Label(app, text=('vous avez ',self.affichetemps(k),'seconde'))
+            
+            temps= Label(app, text=('vous avez ',self.affichetemps(k),'secondes')) #affiche le temps 
             temps.pack()
             
-            tdepart=time.time()
+            tdepart=time.time() #variable qui lance le chronomètre 
             
-            app.label= Label(app,text = "votre réponse") 
-            app.label.pack()
+            label_reponse= Label(app,text = "votre réponse") #titre indiquant les boutons sur lesquels appuyer 
+            label_reponse.pack()
             
-            Listerep=[]
+            Listerep=[] #initialise la liste des reponse choisi comme une liste vide 
 
            
 
 
-            bouton1 = Button(app, text='réponse1' , command=lambda: app.bt1(Listerep))
-            
-            bouton2 = Button(app, text='réponse2' , command=lambda: app.bt2(Listerep))
-            bouton3 = Button(app, text='réponse3' , command=lambda: app.bt3(Listerep))
-            bouton4 = Button(app, text='réponse4' , command=lambda: app.bt4(Listerep))           
+            bouton1 = Button(app, text='réponse1' , command=lambda: app.bt1(Listerep)) # fait le bouton 1 qui appelle la fonction bt1 qui permet d'ajouter 1 à la liste ou supprimer si il est deja dedans 
+            bouton2 = Button(app, text='réponse2' , command=lambda: app.bt2(Listerep)) 
+            bouton3 = Button(app, text='réponse3' , command=lambda: app.bt3(Listerep)) 
+            bouton4 = Button(app, text='réponse4' , command=lambda: app.bt4(Listerep)) 
+                      
             bouton1.pack()
             bouton2.pack()
             bouton3.pack()
             bouton4.pack()
-            print(Listerep)
-            boutonV=Button(app,text='validé',command=app.destroy)
+            
+            
+            boutonV=Button(app,text='validé',command=app.destroy) #bouton qui fait passer a la page suivante  
             boutonV.pack()
-            app.mainloop()
-            print(Listerep)
-            #time.sleep(2)
-            app.destroy
-            Listerep.sort()
-            if self.comparaisonreponse(Listerep,k)==True :
-                tfin=time.time()
-                deltat=int(tfin-tdepart)
-                print(deltat,'seconde') 
-                if deltat<self.affichetemps(k):
+            app.mainloop() 
+            
+            
+            Listerep.sort()   #met dans l'ordre la liste pour ne pas avoir d'erreur de comparaison 
+            if self.comparaisonreponse(Listerep,k)==True : #regarde si la rep de l'utilisateur est vrai
+                tfin=time.time() # temps fin pour calculer deltat
+                deltat=int(tfin-tdepart) #temps que l'utilisateur a mis pour répondre
+                if self.affichetemps(k)==0 :
+                    """ si l'utilisateur a répondu bien répondu à une question sans temps 
+                    affiche message bonne réponse avec les points gagné           """
+                               
+                    app = Application()
+                    app.geometry("800x600")  
+                        
+                    
+                    
+                    point=int(self.point[k])#point gagné pour cette question prend en compte le temps 
+                    labelbonnerep=Label(app,text='réponse correcte')
+                    labelbonnerep.pack()
+                    
+                    labelpointGagné=Label(app,text='vous avez gagné ')
+                    labelpointGagné.pack()
+                    pointGagné= Label(app, text=(int(point),'points ')) 
+                    
+                    pointGagné.pack()
+                    score=score+point #mise a jour du score de l'utilisateur 
+                elif deltat<self.affichetemps(k) :
+                    """
+                    si l'utilisateur a répondu dans les temps pour une question avec temps 
+                    affiche message avec temps mis et point gagné              """
                     app = Application()
                     app.geometry("800x600")  
                         
                     pointquestion=int(self.point[k])
                     tempsquestion=int(self.affichetemps(k))
-                    point=pointquestion*(tempsquestion-deltat)/tempsquestion
-                    app.label=Label(app,text=('vous avez repondu en ',deltat,'seconde '))
-                    app.label.pack()
+                    point=pointquestion*(tempsquestion-deltat)/tempsquestion  #point gagné pour cette question prend en compte le temps 
+                    labelbonnerep=Label(app,text='réponse correcte')
+                    labelbonnerep.pack()
+                    tempsmis=Label(app,text=('vous avez repondu en ',deltat,'seconde '))
+                    tempsmis.pack()
                     
-                    app.label=Label(app,text='vous avez gagné ')
-                    app.label.pack()
-                    app.label= Label(app, text=(point,'point '))
+                    labelpointGagné=Label(app,text='vous avez gagné ')
+                    labelpointGagné.pack()
+                    pointGagné= Label(app, text=(int(point),'points ')) 
                     
-                    app.label.pack()
-                    score=score+point
+                    pointGagné.pack()
+                    score=score+point #mise a jour du score de l'utilisateur 
                     
                        
                 elif deltat>self.affichetemps(k):
+                    """
+                    si bonne réponse mais pas dans les temps affiche message temps écoulé 
+                    """
                     app = Application()
                     app.geometry("800x600")
                         
-                    app.label = Label(app, text='temps écoulé')
-                    app.label.pack()
-                    app.label=Label(app,text='vous avez gagné 0 point ')
-                    app.label.pack()
+                    labeltimeout = Label(app, text='Bonne réponse mais le temps est écoulé')
+                    labeltimeout.pack()
+                    label0point=Label(app,text='vous avez gagné 0 point ')
+                    label0point.pack()
                     
                         
             elif self.comparaisonreponse(Listerep,k)==False :
+                """
+                si mauavaise reponse affiche message  de mauvaise réponse et affiche la bonne réponse
+                """
                 app = Application()
                 app.geometry("800x600")  
                     
-                app.label= Label(app, text='faux la bonne reponse était')
-                app.label.pack()
-                app.label=Label(app,text=self.afficherepcorrect(k))
-                app.label.pack()
+                labelfaux= Label(app, text='faux la bonne reponse était')
+                labelfaux.pack()
+                bonnerep=Label(app,text=self.afficherepcorrect(k))
+                bonnerep.pack()
                 
                   
                    
-            app.bouton = Button(app, text='suivant' , command=app.destroy)
+            app.bouton = Button(app, text='suivant' , command=app.destroy) #fait un bouton suivant qui permet de changer de page et de lancer une nouvelle question 
             app.bouton.pack()
             app.mainloop()
             
             
-        app = Application()
+        app = Application() #derniere page apres les question affichant le score 
         app.geometry("800x600")
-        app.label= Label(app,text='votre score est de :')
-        app.label.pack()
+        labelscore= Label(app,text='votre score est de :')
+        labelscore.pack()
         score=Label(app,text=(int(score)))
         score.pack()
         app.mainloop()
@@ -234,22 +244,8 @@ testquestions = ['q1', 'Q2']
 testrep = [['r11', 'r21'], ['r21', 'r22', 'r23', 'r24']]
 testrepcorr = [[1,1,0,0], [1,1,1,1]]
 testpoint=[50, 70]
-testtemps=[10,10]
+testtemps=[0,0]
 
 testquizz=quizz(testquestions,testrep,testrepcorr,testpoint,testtemps)
 
-"""def test():
-    r=reponse_entry.get()
-    app.destroy()
-    print(r)"""
 testquizz.partieavectemps()
-"""app = Application()
-reponse_entry = Entry()
-reponse_entry.pack()
-r=reponse_entry.get()
-
-print(r)
-app.bouton = Button(app, text='suivant' , command=test)
-app.bouton.pack()
-app.mainloop()
-print(r)"""
