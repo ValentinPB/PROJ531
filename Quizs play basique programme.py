@@ -172,8 +172,6 @@ class quizz:
             bouton3 = Button(app, text='réponse3' , command=Listerep.append(3))
             bouton4 = Button(app, text='réponse4' , command=Listerep.append(4))
             print(Listerep)
-            
-            print(Listerep)
             bouton1.pack()
             bouton2.pack()
             bouton3.pack()
@@ -184,7 +182,7 @@ class quizz:
             app.mainloop()
             
             #time.sleep(2)
-            
+            app.destroy
             
             if self.comparaisonreponse(Listerep,k)==True :
                 tfin=time.time()
@@ -209,17 +207,17 @@ class quizz:
                     app.label.pack()
                     app.label=Label(app,text='point ')
                     score=score+point
-                    app.mainloop()
+                    
                        
                 elif deltat>self.affichetemps(k):
                     app = Application()
                     app.geometry("800x600")
                         
                     app.label = Label(app, text='temps écoulé')
-                    app.label.pack
+                    app.label.pack()
                     app.label=Label(app,text='vous avez gagné 0 point ')
                     app.label.pack()
-                    app.mainloop() 
+                    
                         
             elif self.comparaisonreponse(Listerep,k)==False :
                 app = Application()
