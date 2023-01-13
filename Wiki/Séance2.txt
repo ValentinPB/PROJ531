@@ -1,0 +1,2 @@
+Début du travail d'interface graphique par Colin et Yassir.
+Lecture et exploitation des .txt par Valentin terminée, début du travail sur le programme de création de .txt de quizs.

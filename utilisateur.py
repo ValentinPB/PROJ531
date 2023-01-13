@@ -6,7 +6,7 @@ Created on Thu Jan  5 09:41:14 2023
 """
 import hashlib
 
-with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\utilisateurs.txt','r') as u :
+with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\utilisateurs.txt','r') as u :
     content = u.readlines()
 u.close()
 
@@ -40,13 +40,13 @@ def authentification(Id, password):
 
 def NEW_ACCOUNT(USER, MDP):
     
-    with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\utilisateurs.txt','a') as file :
+    with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\utilisateurs.txt','a') as file :
         HASH= hashlib.sha256( MDP.encode('utf-8')).hexdigest()
         file.write('\n' + USER +',' + HASH +',;')
         file.close()
         
 def est_admin(Id, password):
-    with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\admin.txt','r') as admin_log :
+    with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\admin.txt','r') as admin_log :
         log = admin_log.readlines()
     admin_log.close()
 
@@ -78,7 +78,7 @@ def est_admin(Id, password):
 
 def ajout_score(Id, score,titre_quiz):
     if int(score)<=9:
-        file =open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\utilisateurs.txt','r')
+        file =open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\utilisateurs.txt','r')
         lignes=file.readlines()
         file.close()
         USER = ''
@@ -98,7 +98,7 @@ def ajout_score(Id, score,titre_quiz):
         
         lignes[j-1]= Id +',' + MDP +',' + titre_quiz + ':' + score +';'
         
-        file= open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\utilisateurs.txt','w')
+        file= open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\utilisateurs.txt','w')
         file.writelines(lignes)
         file.close()
    
