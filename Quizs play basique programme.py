@@ -15,18 +15,17 @@ class Application(Tk):
         self.label.pack()
         #self.bouton.pack()
    
-    def bt1 (self):
-        return [1]
-    def bt2 (self):
-       
-        return [2]
-    def bt3 (self):
+    def bt1 (self,Liste):
+        Liste.append(1)
+    def bt2 (self,Liste):
+        Liste.append(2)
+    def bt3 (self,Liste):
       
-        return [3]
-    def bt4 (self):
+        Liste.append(3)
+    def bt4 (self,Liste):
         
         
-        return [4]
+        Liste.append(4)
         
     def btV(self):
         Tfin=time.time()
@@ -50,19 +49,9 @@ class quizz:
         self.repcorr=repcorr                            # liste avec binaire qui indique la position des bonne réponse 
         self.point=point                                #nombre de point de la question 
         self.temps=temps                                #liste temps avec le temps max pour chaque question
-    def bt1 (self):
-        return Listerep.append(1)
-                
-    def bt2 (self):
+   
+        
        
-        return Listerep.append(2)
-    def bt3 (self):
-      
-        print(Listerep.append(3))
-    def bt4 (self):
-        
-        
-        return(Listerep.append(4))
     def affichequestion(self,numeros):
         """
         affiche la question numeros 
@@ -167,23 +156,23 @@ class quizz:
            
 
 
-            bouton1 = Button(app, text='réponse1' , command=Listerep.append(1))
-            bouton2 = Button(app, text='réponse2' , command=Listerep.append(2))
-            bouton3 = Button(app, text='réponse3' , command=Listerep.append(3))
-            bouton4 = Button(app, text='réponse4' , command=Listerep.append(4))
-            print(Listerep)
+            bouton1 = Button(app, text='réponse1' , command=lambda: app.bt1(Listerep))
+            
+            bouton2 = Button(app, text='réponse2' , command=lambda: app.bt2(Listerep))
+            bouton3 = Button(app, text='réponse3' , command=lambda: app.bt3(Listerep))
+            bouton4 = Button(app, text='réponse4' , command=lambda: app.bt4(Listerep))           
             bouton1.pack()
             bouton2.pack()
             bouton3.pack()
             bouton4.pack()
-            
+            print(Listerep)
             boutonV=Button(app,text='validé',command=app.destroy)
             boutonV.pack()
             app.mainloop()
-            
+            print(Listerep)
             #time.sleep(2)
             app.destroy
-            
+            Listerep.sort()
             if self.comparaisonreponse(Listerep,k)==True :
                 tfin=time.time()
                 deltat=int(tfin-tdepart)
@@ -195,17 +184,14 @@ class quizz:
                     pointquestion=int(self.point[k])
                     tempsquestion=int(self.affichetemps(k))
                     point=pointquestion*(tempsquestion-deltat)/tempsquestion
-                    app.label=Label(app,text='vous avez repondu en ')
+                    app.label=Label(app,text=('vous avez repondu en ',deltat,'seconde '))
                     app.label.pack()
-                    app.label= Label(app, text=deltat)
-                    app.label.pack()
-                    app.label=Label(app,text='seconde ')
-                    app.label.pack()
+                    
                     app.label=Label(app,text='vous avez gagné ')
                     app.label.pack()
-                    app.label= Label(app, text=point)
+                    app.label= Label(app, text=(point,'point '))
+                    
                     app.label.pack()
-                    app.label=Label(app,text='point ')
                     score=score+point
                     
                        
