@@ -107,3 +107,4 @@ def VerifIncoherences(titre) :
 
         if bon :        #Si aucun problème n'a été detecté.
             print('Aucun problème détecté.')
+LectureFichier('Animaux')
