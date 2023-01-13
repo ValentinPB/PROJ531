@@ -119,7 +119,8 @@ class quizz:
         for k in range(0,len(self.questions)): # fait tourner pour chaque question du quiz
             app = Application()     #fait une page 
             app.geometry("800x600")
-            question= Label(app, text=self.affichequestion(k)) #affiche la question 
+            question= Label(app, text=self.affichequestion(k), font=("Courier", 15)) #affiche la question 
+            question.config(fg='red')
             question.pack()
             reponse = Label(app, text=self.afficherep(k)) #affiche reponse posssible 
             reponse.pack()
@@ -149,6 +150,7 @@ class quizz:
             
             
             boutonV=Button(app,text='validé',command=app.destroy) #bouton qui fait passer a la page suivante  
+            boutonV.config(fg='green')
             boutonV.pack()
             app.mainloop() 
             
