@@ -1,3 +1,5 @@
+Pour lancer l'application, exécutez le fichier "QIz.py".
+
 Pour creer son propre compte:
 	appuyer sur "creer un compte	
 	mettre son id et mdp	
