@@ -189,6 +189,7 @@ class quizz:
                     tempsquestion=int(self.affichetemps(k))
                     point=pointquestion*(tempsquestion-deltat)/tempsquestion  #point gagné pour cette question prend en compte le temps 
                     labelbonnerep=Label(app,text='réponse correcte')
+                    labelbonnerep.config(fg='green')
                     labelbonnerep.pack()
                     tempsmis=Label(app,text=('vous avez repondu en ',deltat,'seconde '))
                     tempsmis.pack()
@@ -209,6 +210,7 @@ class quizz:
                     app.geometry("800x600")
                         
                     labeltimeout = Label(app, text='Bonne réponse mais le temps est écoulé')
+                    labeltimeout.config(fg='red')
                     labeltimeout.pack()
                     label0point=Label(app,text='vous avez gagné 0 point ')
                     label0point.pack()
@@ -222,6 +224,7 @@ class quizz:
                 app.geometry("800x600")  
                     
                 labelfaux= Label(app, text='faux la bonne reponse était la réponse')
+                labelfaux.config(fg='red')
                 labelfaux.pack()
                 bonnerepn=Label(app,text=self.afficherepcorrect(k))
                 bonnerepn.pack()

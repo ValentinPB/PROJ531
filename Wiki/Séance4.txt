@@ -1,0 +1,1 @@
+Finalisation du code créateur de quiz par Valentin. Début du travail de réglage de problèmes et bugs.
