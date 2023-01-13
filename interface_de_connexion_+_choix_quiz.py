@@ -7,6 +7,19 @@ Created on Tue Jan 10 08:37:49 2023
 import utilisateur as uti
 from tkinter import *
 
+
+import os
+from inspect import getsourcefile
+path = os.path.abspath(getsourcefile(lambda:0))
+path = path[::-1]
+c = 0
+while path[c] != '\\' :
+    c = c+1
+for i in range(c) :
+    path = path.replace(path[0], '', 1)
+path = path[::-1]
+path = path + 'Quizs\\'
+
 global fenetre1, fenetre2,administrateur
 
 
@@ -30,7 +43,7 @@ def fenetre():  #c'est la fenetre d'accueil pour se connecter en etant joueur
         
         if connect:
             fenetre1.destroy()
-            choix_quiz()
+            page_choix_quiz()
         else:
             erreur = Label(fenetre1, text="nom utilisateur ou mdp erronés")
             erreur.pack()
@@ -103,7 +116,7 @@ def nouveau_compte():
     nouveau.title('QIz')
     menu= Menu(nouveau)
     new_item = Menu(menu)
-    new_item.add_command(label='admin')
+    new_item.add_command(label='accueil')
     new_item.add_separator()
     menu.add_cascade(label='Fichier' , menu=new_item)
     nouveau.config(menu=menu)
@@ -122,7 +135,7 @@ def nouveau_compte():
     nouveau.mainloop()
     
 
-def choix_quiz(): #c'est la fentre qui propose tout les quiz existant
+def page_choix_quiz(): #c'est la fentre qui propose tout les quiz existant
     global fenetre2
     def test(): # a modifier selon quel fenetre on veut ouvrir
         global fenetre2, quiz
@@ -132,6 +145,7 @@ def choix_quiz(): #c'est la fentre qui propose tout les quiz existant
         global fenetre2, fenetre1
         fenetre2.destroy()
         fenetre()
+        
         
     fenetre2 = Tk()
     fenetre2.title('QIz')
@@ -147,12 +161,35 @@ def choix_quiz(): #c'est la fentre qui propose tout les quiz existant
     champ_label = Label(fenetre2, text="choisir un quiz")
     champ_label.place(x=10, y=10 , anchor='ne')
     champ_label.pack()
+    
+    files = []
+    for root, dirs, files in os.walk(path):
+        for name in files:
+            #print(name)
+            if name.endswith((".txt")):
+                files.append(name)
+            break
+        break
+    
+    
+    
+ 
+ 
+    def construct_button(i):
+        b = Button(root, text=str(i), command=lambda i=i: print(i))
+        return b
+ 
+ 
+
+    for i in len(files):
+        construct_button(i).pack()
+
+    
     bouton = Button(fenetre2,text="quiz1", command=test)
     bouton.pack()
     bouton2 = Button(fenetre2,text="quiz2", command=test)
     bouton2.pack()
-    bouton3 = Button(fenetre2,text="quiz3", command=test)
-    bouton3.pack()
+    
     fenetre2.geometry("800x900")
     fenetre2.mainloop()
     
@@ -166,7 +203,7 @@ def page_auth_administrateur(): #cette fentre permet à l'admin de se connecter
         
         if connect:
             auth_administrateur.destroy()
-            page_admin()
+            page_creer_quiz()
         else:
             erreur = Label(fenetre1, text="nom utilisateur ou mdp erronés")
             erreur.pack()
@@ -214,6 +251,15 @@ def page_admin(): #cette fenetre permet d'ajouter des questions etc...
     admin.title('QIz')
     admin.geometry("800x900")
     admin.mainloop()
+    
+    
+def page_creer_quiz(): #c'est la fenetre qui va permettre de creer de nouveaux quiz si on est admin
+    global creer_quiz
+    import essai
+    """creer_quiz = Tk()
+    creer_quiz.title('QIz')
+    creer_quiz.geometry("800x900")
+    creer_quiz.mainloop()"""
 
 def page_quiz():
     global quiz
