@@ -40,7 +40,7 @@ def authentification(Id, password):
 
 def NEW_ACCOUNT(USER, MDP):
     
-    with open(r'D:\IDU\PROJ531\Utilisateurs\utilisateurs.txt','a') as file :
+    with open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\utilisateurs.txt','a') as file :
         HASH= hashlib.sha256( MDP.encode('utf-8')).hexdigest()
         file.write('\n' + USER +',' + HASH +',;')
         file.close()
@@ -74,6 +74,37 @@ def est_admin(Id, password):
         return True
     else:
         return False
+    
+
+def ajout_score(Id, score,titre_quiz):
+    if int(score)<=9:
+        file =open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\utilisateurs.txt','r')
+        lignes=file.readlines()
+        file.close()
+        USER = ''
+        MDP=''
+        j=0
+        while Id != USER:
+            USER=''
+            i=0
+            while lignes[j][i] !=',':
+                USER += lignes[j][i]
+                i += 1
+            j+=1
+        while content[j-1][i+1] !=',':
+            MDP += content[j-1][i+1]
+            i += 1
+    
+        
+        lignes[j-1]= Id +',' + MDP +',' + titre_quiz + ':' + score +';'
+        
+        file= open(r'C:\Users\chafi\OneDrive\Bureau\Nouveau dossier (2)\interface_graphique\utilisateurs.txt','w')
+        file.writelines(lignes)
+        file.close()
+   
+        
+
+            
 
 
 

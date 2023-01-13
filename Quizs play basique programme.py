@@ -15,21 +15,43 @@ class Application(Tk):
         self.label.pack()
         #self.bouton.pack()
    
+    def bt1 (self,Liste):
+        Liste.append(1)
+    def bt2 (self,Liste):
+        Liste.append(2)
+    def bt3 (self,Liste):
+      
+        Liste.append(3)
+    def bt4 (self,Liste):
+        
+        
+        Liste.append(4)
+        
+    def btV(self):
+        Tfin=time.time()
+        self.destroy
+        return Tfin
     
+
+
 
     def get_entry(self,reponse_entry):
         r=reponse_entry.get()
         self.destroy()
-        return(r)
+        print(r)
     def question_suivante(self):
         pass
 class quizz:
+     
     def __init__(self,questions,rep,repcorr,point,temps):
         self.questions=questions                        # liste questions 
         self.rep=rep                                    #liste de liste de réponses pour chaque questions 
         self.repcorr=repcorr                            # liste avec binaire qui indique la position des bonne réponse 
         self.point=point                                #nombre de point de la question 
         self.temps=temps                                #liste temps avec le temps max pour chaque question
+   
+        
+       
     def affichequestion(self,numeros):
         """
         affiche la question numeros 
@@ -118,66 +140,81 @@ class quizz:
             app.geometry("800x600")
             question= Label(app, text=self.affichequestion(k))
             question.pack()
-            
-           
             reponse = Label(app, text=self.afficherep(k))
             reponse.pack()
-            temps= Label(app, text=self.affichetemps(k))
+           
+            temps= Label(app, text=('vous avez ',self.affichetemps(k),'seconde'))
             temps.pack()
             
             tdepart=time.time()
             
             app.label= Label(app,text = "votre réponse") 
             app.label.pack()
-            reponse_entry = Entry()
-            reponse_entry.pack()
             
+            Listerep=[]
+
+           
+
+
+            bouton1 = Button(app, text='réponse1' , command=lambda: app.bt1(Listerep))
             
-            boutonV = Button(app, text='validé' , command=app.get_entry)
+            bouton2 = Button(app, text='réponse2' , command=lambda: app.bt2(Listerep))
+            bouton3 = Button(app, text='réponse3' , command=lambda: app.bt3(Listerep))
+            bouton4 = Button(app, text='réponse4' , command=lambda: app.bt4(Listerep))           
+            bouton1.pack()
+            bouton2.pack()
+            bouton3.pack()
+            bouton4.pack()
+            print(Listerep)
+            boutonV=Button(app,text='validé',command=app.destroy)
             boutonV.pack()
-            
-            if self.comparaisonreponse(self.convertir_rep_str_list('3,4'),k)==True :
+            app.mainloop()
+            print(Listerep)
+            #time.sleep(2)
+            app.destroy
+            Listerep.sort()
+            if self.comparaisonreponse(Listerep,k)==True :
                 tfin=time.time()
                 deltat=int(tfin-tdepart)
                 print(deltat,'seconde') 
                 if deltat<self.affichetemps(k):
-                        
+                    app = Application()
+                    app.geometry("800x600")  
                         
                     pointquestion=int(self.point[k])
                     tempsquestion=int(self.affichetemps(k))
                     point=pointquestion*(tempsquestion-deltat)/tempsquestion
-                    app.label=Label(app,text='vous avez repondu en ')
+                    app.label=Label(app,text=('vous avez repondu en ',deltat,'seconde '))
                     app.label.pack()
-                    app.label= Label(app, text=deltat)
-                    app.label.pack()
-                    app.label=Label(app,text='seconde ')
-                    app.label.pack()
+                    
                     app.label=Label(app,text='vous avez gagné ')
                     app.label.pack()
-                    app.label= Label(app, text=point)
+                    app.label= Label(app, text=(point,'point '))
+                    
                     app.label.pack()
-                    app.label=Label(app,text='point ')
                     score=score+point
-                    app.bouton = Button(app, text='suivant' , command=app.destroy)
-                    app.bouton.pack()
+                    
                        
-                else:
-                      
+                elif deltat>self.affichetemps(k):
+                    app = Application()
+                    app.geometry("800x600")
                         
                     app.label = Label(app, text='temps écoulé')
-                    app.label.pack
+                    app.label.pack()
                     app.label=Label(app,text='vous avez gagné 0 point ')
                     app.label.pack()
-                       
-                        
-            else:
                     
+                        
+            elif self.comparaisonreponse(Listerep,k)==False :
+                app = Application()
+                app.geometry("800x600")  
                     
                 app.label= Label(app, text='faux la bonne reponse était')
                 app.label.pack()
                 app.label=Label(app,text=self.afficherepcorrect(k))
                 app.label.pack()
-                    
+                
+                  
                    
             app.bouton = Button(app, text='suivant' , command=app.destroy)
             app.bouton.pack()
@@ -195,7 +232,7 @@ class quizz:
 
 testquestions = ['q1', 'Q2']
 testrep = [['r11', 'r21'], ['r21', 'r22', 'r23', 'r24']]
-testrepcorr = [[1,1], [0,0,1,1]]
+testrepcorr = [[1,1,0,0], [1,1,1,1]]
 testpoint=[50, 70]
 testtemps=[10,10]
 
