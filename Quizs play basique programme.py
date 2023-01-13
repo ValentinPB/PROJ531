@@ -137,10 +137,10 @@ class quizz:
            
 
 
-            bouton1 = Button(app, text='réponse1' , command=lambda: app.bt1(Listerep)) # fait le bouton 1 qui appelle la fonction bt1 qui permet d'ajouter 1 à la liste ou supprimer si il est deja dedans 
-            bouton2 = Button(app, text='réponse2' , command=lambda: app.bt2(Listerep)) 
-            bouton3 = Button(app, text='réponse3' , command=lambda: app.bt3(Listerep)) 
-            bouton4 = Button(app, text='réponse4' , command=lambda: app.bt4(Listerep)) 
+            bouton1 = Button(app,text=('reponse 1',self.afficherep(k)[0]), command=lambda: app.bt1(Listerep)) # fait le bouton 1 qui appelle la fonction bt1 qui permet d'ajouter 1 à la liste ou supprimer si il est deja dedans 
+            bouton2 = Button(app,text=('reponse 2',self.afficherep(k)[1]), command=lambda: app.bt2(Listerep)) 
+            bouton3 = Button(app,text=('reponse 3',self.afficherep(k)[2]), command=lambda: app.bt3(Listerep)) 
+            bouton4 = Button(app,text=('reponse 4',self.afficherep(k)[3]), command=lambda: app.bt4(Listerep)) 
                       
             bouton1.pack()
             bouton2.pack()
@@ -219,10 +219,12 @@ class quizz:
                 app = Application()
                 app.geometry("800x600")  
                     
-                labelfaux= Label(app, text='faux la bonne reponse était')
+                labelfaux= Label(app, text='faux la bonne reponse était la réponse')
                 labelfaux.pack()
-                bonnerep=Label(app,text=self.afficherepcorrect(k))
-                bonnerep.pack()
+                bonnerepn=Label(app,text=self.afficherepcorrect(k))
+                bonnerepn.pack()
+                
+
                 
                   
                    
@@ -240,11 +242,13 @@ class quizz:
         app.mainloop()
         
 
-testquestions = ['q1', 'Q2']
-testrep = [['r11', 'r21'], ['r21', 'r22', 'r23', 'r24']]
-testrepcorr = [[1,1,0,0], [1,1,1,1]]
-testpoint=[50, 70]
-testtemps=[0,0]
+testquestions = ["Quel animal est surnommé le meilleur ami de l'homme ?", 'Quel animal vit en Australie et se déplace en bondissant ?', 'Quel animal est le plus grand ?', 
+'Quel animal peut vivre le plus vieux ?', 'Quel animal est surnommé le Roi des animaux ?', 'Quels animaux sont des symboles nationaux ?', 'Quels animaux sont fantastiques ?']
+testrep = [['Perroquet', 'Chien', 'Chat', 'Poisson rouge'], ['Poisson volant', 'Crabe', 'Kangourou', 'Sanglier'], ['Giraffe', 'Baleine bleue', 'Mouche', 'Eléphant'], 
+['Phasme', 'Eléphant', 'Chat', 'Tortue'], ['Baleine bleue', 'Crocodile', 'Lion', 'Gorille'], ['Aigle', 'Crocodile', 'Rouge-gorge', 'Coq'], ['Méduse', 'Licorne', 'Griffon', 'Dragon']]
+testrepcorr =  [[0, 1, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0], [1, 0, 0, 1], [0, 1, 1, 1]]
+testpoint=[30, 50, 75, 75, 30, 100, 50]
+testtemps=[15, 30, 30, 30, 15, 60, 30]
 
 testquizz=quizz(testquestions,testrep,testrepcorr,testpoint,testtemps)
 
