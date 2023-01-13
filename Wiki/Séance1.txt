@@ -1,0 +1,4 @@
+Définition de l'ampleur du projet, des features que l'on souhaite réaliser. Répartition des tâches :
+- Valentin sur le formatage et la lecture de fichiers .txt pour stocker les quizs
+- Loïs sur le code permettant de jouer aux quizs
+- Colin et Yassir sur le système de compte et d'authentification
